@@ -7,4 +7,4 @@
 - MineSweeper.py : main() 이 있는 클래스 
 * * *
 - Dic_Board.py : python의 dictionary를 사용한 코드. Mine_Board + Player_Board
-- MineSweeper_dic.py : Dic_Board를 사용한 
+- MineSweeper_dic.py : Dic_Board를 사용한 main()이 있는 클래스
