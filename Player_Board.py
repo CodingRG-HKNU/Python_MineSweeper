@@ -10,6 +10,7 @@ class Player_Board(Board.Board):
         self.__numOpened = 0
         self.__numMines = mine
         self.gameover = False
+        self.pause = False
 
     def __init_Array(self, k):
         for i in range(self.get_row()):
@@ -17,26 +18,26 @@ class Player_Board(Board.Board):
                 self.set_cell(i, j, k)
 
     def open(self, x, y, b):
-        if x < 0 or y < 0  or x >= self.get_row() or y >= self.get_col():
-            pass
-        elif not(self.__is_checked(x, y)):
+        #if x < 0 or y < 0 or x >= self.get_row() or y >= self.get_col():
+        #    pass
+        #elif not(self.__is_checked(x, y)):
+        if 0 <= x < self.get_row() and 0 <= y < self.get_col() and not(self.__is_checked(x, y)):
             copyed = b.get_cell(x, y)
-
             if copyed == 9:
-                self.set_cell(x, y, b.get_cell(x, y))
+                self.set_cell(x, y, copyed)
                 self.GameOver()
             elif copyed == 0:
                 for i in range(x-1, x+2):
                     for j in range(y-1, y+2):
-                        if (i == i and j == j) or i < 0 or j < 0 or i >= self.get_row() or j >= self.get_col():
+                        if (i == x and j == y) or i < 0 or j < 0 or i >= self.get_row() or j >= self.get_col():
                             continue
                         # 재귀호출
-                        self.set_cell(x, y, b.get_cell(x, y))
+                        self.set_cell(x, y, copyed)
                         self.open(i, j, b)
             else:
-                self.set_cell(x, y, b.get_cell(x, y))
+                self.set_cell(x, y, copyed)
             # 열은 칸 수 기록
-            self.__numOpened +=1
+            self.__numOpened += 1
             # 승리조건
             if (self.get_row() * self.get_col() - self.__numOpened) == self.__numMines:
                 self.GameClear()
@@ -49,9 +50,11 @@ class Player_Board(Board.Board):
 
     def GameOver(self):
         self.gameover = True
+        self.pause = True
         print("Game Over..")
 
     def GameClear(self):
+        self.pause = True
         print("Game Clear !")
         # 승리
 
