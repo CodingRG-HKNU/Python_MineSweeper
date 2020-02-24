@@ -22,20 +22,27 @@ class Player_Board(Board.Board):
         #    pass
         #elif not(self.__is_checked(x, y)):
         if 0 <= x < self.get_row() and 0 <= y < self.get_col() and not(self.__is_checked(x, y)):
-            copyed = b.get_cell(x, y)
-            if copyed == 9:
-                self.set_cell(x, y, copyed)
+            copied = b.get_cell(x, y)
+            if copied == 9:
+                self.set_cell(x, y, copied)
                 self.GameOver()
-            elif copyed == 0:
-                for i in range(x-1, x+2):
-                    for j in range(y-1, y+2):
-                        if (i == x and j == y) or i < 0 or j < 0 or i >= self.get_row() or j >= self.get_col():
+            elif copied == 0:
+                # for i in range(x-1, x+2):
+                #     for j in range(y-1, y+2):
+                #         if (i == x and j == y) or i < 0 or j < 0 or i >= self.get_row() or j >= self.get_col():
+                #             continue
+                #         # 재귀호출
+                #         self.set_cell(x, y, copied)
+                #         self.open(i, j, b)
+                for i in range(max(x-1, 0), min(x+1, self.get_col()-1) + 1):
+                    for j in range(max(y-1, 0), min(y+2, self.get_row()-1) + 1):
+                        if (i == x and j == y):
                             continue
                         # 재귀호출
-                        self.set_cell(x, y, copyed)
+                        self.set_cell(x, y, copied)
                         self.open(i, j, b)
             else:
-                self.set_cell(x, y, copyed)
+                self.set_cell(x, y, copied)
             # 열은 칸 수 기록
             self.__numOpened += 1
             # 승리조건
