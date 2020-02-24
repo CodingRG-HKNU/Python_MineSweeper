@@ -35,7 +35,7 @@ class Player_Board(Board.Board):
                 #         self.set_cell(x, y, copied)
                 #         self.open(i, j, b)
                 for i in range(max(x-1, 0), min(x+1, self.get_col()-1) + 1):
-                    for j in range(max(y-1, 0), min(y+2, self.get_row()-1) + 1):
+                    for j in range(max(y-1, 0), min(y+1, self.get_row()-1) + 1):
                         if (i == x and j == y):
                             continue
                         # 재귀호출

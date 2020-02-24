@@ -14,9 +14,11 @@ class Mine_Board(Board.Board):
 
     def __set_Mine(self):
         for i in range(self.get_numMines()):
-            x = self.__get_RandNum(0, self.get_row()-1)
-            y = self.__get_RandNum(0, self.get_col()-1)
-            # x, y = self.gencoordinates(0, self.get_row()-1, 0, self.get_col()-1)
+            # x = self.__get_RandNum(0, self.get_row()-1)
+            # y = self.__get_RandNum(0, self.get_col()-1)
+            g = self.gencoordinates(0, self.get_row()-1, 0, self.get_col()-1)
+            x, y = next(g)
+
             if self.get_cell(x, y) == 0:
                 self.set_cell(x, y, 9)
             else:
